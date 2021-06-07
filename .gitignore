@@ -1,8 +1,8 @@
 /build
 /dist
 /venv
-/__pychache__
-/.idea
+__pychache
+.idea
 
 *.pkl
 
