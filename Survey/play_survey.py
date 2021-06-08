@@ -1,10 +1,9 @@
 from serialize import *
 from utilities import *
 
-history = []
-
 
 def play_survey_engine():
+    history = []
     save_choice = ''
     data = load_survey()
 
@@ -99,3 +98,4 @@ def play_survey_engine():
         print()
     input('Press any key to go back to the main menu...')
     clear_console()
+    return

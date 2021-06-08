@@ -2,7 +2,7 @@ from models import Player, Question, Answer
 
 
 def create_questions():
-    q = Question(None)
+    q = Question(None, {})
     q.answers = []
     a = Answer(None, None)
     questions = []
@@ -29,7 +29,7 @@ def create_questions():
 
             break
         else:
-            q = Question(None)
+            q = Question(None, {})
             q.answers = []
             a = Answer(None, None)
 

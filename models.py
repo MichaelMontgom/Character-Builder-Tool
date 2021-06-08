@@ -9,9 +9,9 @@ class Answer:
 
 
 class Question:
-    def __init__(self, body):
+    def __init__(self, body, answers):
         self.body = body
-        self.answers = {}
+        self.answers = answers
 
     def __str__(self):
         return f'Body: {self.body}, Answers: {self.answers}'

@@ -26,11 +26,22 @@ def save_player(player):
         print(f'Something went wrong saving the character')
 
 
-def load_players():
-    with open(f'character.pkl', 'rb') as f:
-        data = pickle.load(f)
+def save_players(players):
+    try:
+        with open(f'character.pkl', 'wb') as f:
+            pickle.dump(players, f, pickle.HIGHEST_PROTOCOL)
+    except Exception as e:
+        print(e)
 
-    return data
+
+def load_players():
+    try:
+        with open(f'character.pkl', 'rb') as f:
+            data = pickle.load(f)
+
+        return data
+    except Exception as e:
+        print(e)
 
 
 def save_survey(survey):
@@ -53,10 +64,13 @@ def save_survey(survey):
 
 
 def load_survey():
-    with open(f'survey.pkl', 'rb') as f:
-        data = pickle.load(f)
+    try:
+        with open(f'survey.pkl', 'rb') as f:
+            data = pickle.load(f)
 
-    return data
+        return data
+    except Exception as e:
+        print(e)
 
 
 def get_path():
@@ -70,7 +84,10 @@ def get_path():
 
 
 def write_to_file(filename, data, name):
-    with open(filename, 'w') as f:
-        f.write(f'Name: {name}\n\n')
-        for i in data:
-            f.write(f'\t- {i.reward}\n')
+    try:
+        with open(filename, 'w') as f:
+            f.write(f'Name: {name}\n\n')
+            for i in data:
+                f.write(f'\t- {i.reward}\n')
+    except Exception as e:
+        print(e)

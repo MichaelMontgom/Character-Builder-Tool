@@ -1,6 +1,22 @@
 from serialize import *
 import os
 from utilities import WrongValueError, clear_console
+from models import *
+
+
+def display_questions(questions):
+    incrementer = 0
+    incrementer2 = 1
+    inc = 1
+    for i in questions:
+        print(f'Q{incrementer + 1}: {questions[incrementer].body}')
+        for j in i.answers:
+            print(f'{inc}. {j.body} ---> {j.reward}')
+            inc = inc + 1
+        incrementer = incrementer + 1
+        print()
+        print('-' * 40)
+        print()
 
 
 def edit_character():
@@ -32,18 +48,21 @@ def edit_character():
     questions = character.questions
 
     while True:
-        incrementer = 0
-        incrementer2 = 1
-        inc = 1
-        for i in questions:
-            print(f'Q{incrementer + 1}: {questions[incrementer].body}')
-            for j in i.answers:
-                print(f'{inc}. {j.body} ---> {j.reward}')
-                inc = inc + 1
-            incrementer = incrementer + 1
-            print()
-            print('-' * 40)
-            print()
+        # incrementer = 0
+        # incrementer2 = 1
+        # inc = 1
+        # for i in questions:
+        #     print(f'Q{incrementer + 1}: {questions[incrementer].body}')
+        #     for j in i.answers:
+        #         print(f'{inc}. {j.body} ---> {j.reward}')
+        #         inc = inc + 1
+        #     incrementer = incrementer + 1
+        #     print()
+        #     print('-' * 40)
+        #     print()
+
+        display_questions(questions)
+
         while True:
             try:
                 choice_question = int(input(f'Please choose a question you would like to edit'))
@@ -80,12 +99,54 @@ def edit_character():
             else:
                 break
 
-        if choice_edit == 'a':
-            print(f'pressed a')
-        else:
+        if choice_edit == 'q':
             print(f'pressed q')
 
-        #TODO: Setup editing for a specific question and answer
+            print(f'Question: {questions[choice_question - 1].body}')
+
+            new_body = input(f'Please enter the new body to the question: ')
+
+            new_question = Question(new_body, questions[choice_question - 1].answers)
+
+            questions[choice_question - 1] = new_question
+
+            characters[choice].questions = questions
+
+            save_players(characters)
+
+            clear_console()
+
+            display_questions(questions)
+
+            # quit_edit = input(f'Would you like to quit editing? (y/n)')
+
+            while True:
+                try:
+                    quit_edit = str(input(f'Would you like to quit editing? (y/n)').lower())
+                    if quit_edit not in ('y', 'n'):
+                        raise WrongValueError
+
+                except WrongValueError:
+                    print(f'That was not an option, please try again')
+                    continue
+                except ValueError:
+                    print(f'That was not an string, try again')
+                    continue
+                else:
+                    break
+
+            if quit_edit == 'y':
+                return
+
+
+
+
+
+
+        else:
+            print(f'pressed a')
+
+        # TODO: Setup editing for a specific question and answer
 
 
 def edit_survey():

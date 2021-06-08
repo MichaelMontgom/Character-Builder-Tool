@@ -1,10 +1,10 @@
 from serialize import *
 from utilities import *
 
-history = []
-
 
 def play_engine():
+    history = []
+
     save_choice = ''
 
     data = load_players()
